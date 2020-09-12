@@ -167,6 +167,95 @@ function findLast(list) {
   }
   return currNode.value;
 }
+// Needs implementation
+// function reverse(list) {
+ 
+// }
+
+function thirdFromEnd(list) {
+  if(!list.head || list.head === null) {
+    return 'Not a list.'
+  }
+  let currNode = list.head;
+  while (currNode.next !== null){
+    nextNode = currNode.next;
+    nextNextNode = nextNode.next;
+    if(nextNextNode.next === null){
+      return `${currNode.value} is third from the end`;
+    }
+    else { 
+      currNode = nextNode;
+    }
+  }
+}
+
+function middle(list){
+  if(!list || list.head === null) {
+    return `No List.`
+  }
+  let currNode = list.head;
+  let endNode = currNode.next.next;
+  
+  while(endNode.next !== null) {
+    currNode = currNode.next;
+    endNode = endNode.next.next;
+    if(!endNode){
+      return `even items in list, middle item rounded down is ${currNode.value}`;
+    }
+  }
+  return `odd items in list, middle item is ${currNode.next.value}`;
+}
+
+function cycle(list) {
+  if(!list || list.head === null){
+    return console.log('Bad list.');
+  }
+  let currNode = list.head;
+  let tempNode = list.head;
+  while(currNode !== null) {
+    console.log(`current ${currNode.value} temp ${tempNode.value}`);
+    if(tempNode.next === currNode){
+      return console.log(`List has a cycle ${tempNode.value} points to ${currNode.value}`);
+    }
+    tempNode = tempNode.next;
+    if(tempNode === null){
+      currNode = currNode.next;
+      tempNode = currNode.next;
+      if(tempNode === null){
+        return console.log('no cycle');
+      }
+    }
+    
+  }
+  console.log(currNode.value);
+    //currNode= currNode.next;
+}
+// Needs work
+// function sort(list){
+//   if(!list || list.head === null){
+//     return console.log(`Bad list`);
+//   }
+//   let max = 0;
+//   let prevNode = list.head;
+//   let nextNode = list.head;
+//   let maxNode = list.head;
+//   let currNode = list.head;
+//   let tempNode = list.head;
+//   while(currNode !== null){
+//     while(tempNode !== null) {
+//       if(tempNode.value > max){
+
+//         maxNode = tempNode;
+//         max = tempNode.value;  
+//       }
+//       console.log(`max: ${max} maxNode value: ${maxNode.value} currNode: ${currNode.value} tempNodeValue: ${tempNode.value}`);
+//       tempNode = tempNode.next;
+//     }
+//     console.log(`INSERT REMOVE ${max}`);    
+//     currNode = currNode.next;
+//     tempNode = currNode;
+//   }
+// }
 
 function main() {
     let SLL = new LinkedList();
@@ -186,11 +275,105 @@ function main() {
     
     return SLL;
   }
+
+function middleTest() {
+  let evenLL = new LinkedList();
+    evenLL.insertFirst('1');
+    evenLL.insertLast('2');
+    evenLL.insertLast('3');
+    evenLL.insertLast('4');
+    evenLL.insertLast('5');
+    evenLL.insertLast('6');
+    evenLL.insertLast('7');
+    evenLL.insertLast('8');
+    evenLL.insertLast('9');
+    evenLL.insertLast('10');
+    
+  let oddLL = new LinkedList();
+    oddLL.insertFirst('1');
+    oddLL.insertLast('2');
+    oddLL.insertLast('3');
+    oddLL.insertLast('4');
+    oddLL.insertLast('5');
+
+  console.log(middle(evenLL));
+  console.log(middle(oddLL));
+  console.log(middle(main()));
+  }
   
+  function cycleTest() {
+    let CLL = new LinkedList();
+      CLL.insertFirst('1');
+      CLL.insertLast('2');
+      CLL.insertLast('3');
+      CLL.insertLast('4');
+      CLL.insertLast('5');
+      //CLL.find('5').next = CLL.find('1');
+    
+    cycle(CLL);
+  }
+  function sortTest() {
+    let sortLL = new LinkedList();
+      sortLL.insertFirst(19);
+      sortLL.insertLast(2);
+      sortLL.insertLast(5);
+      sortLL.insertLast(3);
+      sortLL.insertLast(100);
+
+      sort(sortLL);
+  }
   console.log(display(main()));
-  console.log(size(main()));
-  console.log(isEmpty(main()));
-  console.log(isEmpty(7));
-  console.log(findPrevious('Apollo', main()));
-  console.log(findLast(main()));
+//   console.log(size(main()));
+//   console.log(isEmpty(main()));
+//   console.log(isEmpty(7));
+//   console.log(findPrevious('Apollo', main()));
+//   console.log(findLast(main()));
+//   console.log(display(reverse(main())));
+//   console.log(thirdFromEnd(main()));
+//   middleTest();
+//   cycle(main());
+//   cycleTest();
+//   sortTest();
+// Mystery Program
+// The program goes through a linked list and if a node's value is equal to the next node's value, it delete's that next node.
+// The time complexity is O(n^2) as the program runs through the entire list because there is a nested while statement.
+
+// function WhatDoesThisProgramDo(lst) {
+//     let current = lst.head;
+//     while (current !== null) {
+//         let newNode = current;
+//         while (newNode.next !== null) {
+//             if (newNode.next.value === current.value) {
+//                 newNode.next = newNode.next.next;
+//             }
+//             else {
+//                 newNode = newNode.next;
+//             }
+//         }
+//         current = current.next;
+//     }
+//     console.log(display(lst));
+// }
+
+// function mysteryList(){
+//     let ML = new LinkedList();
+  
+//     ML.insertFirst('Apollo');
+//     ML.insertLast('Boomer');
+//     ML.insertLast('Helo');
+//     ML.insertLast('Husker');
+//     ML.insertLast('Tauhida');
+//     ML.insertLast('Starbuck');
+//     ML.insertLast('Tauhida');
+//     ML.insertLast('Tauhida');
+//     ML.insertLast('Tauhida');
+//     ML.insertLast('Tauhida');
+//     ML.insertLast('Husker');
+//     ML.insertLast('Apollo');
+
+//     return ML;
+// }
+
+// console.log(display(mysteryList()));
+// WhatDoesThisProgramDo(mysteryList());
   
